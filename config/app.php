@@ -52,7 +52,8 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://ecommerce-app.ar-techpro.com'),
+    'foodpanda_url' => env('VITE_FOODPANDA_URL', 'https://foodpanda-app.ar-techpro.com'),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-# Ecommerce App
+# Ecommerce App (SSO Server)
 
 This is the **central authentication application** (Ecommerce) that provides SSO to the Foodpanda app using Laravel Passport.
 

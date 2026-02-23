@@ -47,7 +47,7 @@ class LoginController extends Controller
 
         $token = $user->createToken('sso-foodpanda-' . now()->timestamp)->accessToken;
 
-        $callback = rtrim(env('VITE_FOODPANDA_URL'), '/') . '/sso/callback?token=' . $token;
+        $callback = rtrim(config('app.foodpanda_url'), '/') . '/sso/callback?token=' . $token;
 
         return Inertia::location($callback);
     }
