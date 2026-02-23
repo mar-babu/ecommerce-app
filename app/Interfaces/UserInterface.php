@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Interfaces\Interfaces;
+namespace App\Interfaces;
 
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

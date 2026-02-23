@@ -1,0 +1,35 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\User;
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+class UserSeeder extends Seeder
+{
+    public function run(): void
+    {
+        User::updateOrCreate(
+            ['email' => 'test@example.com'],
+            [
+                'name'              => 'Test User',
+                'email'             => 'test@example.com',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('password123'), // Change in production!
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'admin@example.com'],
+            [
+                'name'              => 'Admin User',
+                'email'             => 'admin@example.com',
+                'email_verified_at' => now(),
+                'password'          => Hash::make('admin456'),
+            ]
+        );
+
+        $this->command->info('Test users created successfully!');
+    }
+}

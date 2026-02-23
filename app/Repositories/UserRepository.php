@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Repositories;
 
-use App\Contracts\Repositories\UserRepositoryInterface;
+use App\Interfaces\UserInterface;
 use App\Models\User;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class UserRepository implements UserRepositoryInterface
+class UserRepository implements UserInterface
 {
     public function findByEmail(string $email): User
     {

@@ -4,30 +4,39 @@ declare(strict_types=1);
 
 namespace App\Services;
 
-use App\Contracts\Repositories\UserRepositoryInterface;
+use App\Repositories\UserRepository;
 use App\Models\User;
 use App\Traits\HandlesAuthentication;
-use Laravel\Passport\PersonalAccessTokenResult;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Laravel\Passport\PersonalAccessTokenResult;
 
 class AuthService
 {
     use HandlesAuthentication;
 
     public function __construct(
-        protected UserRepositoryInterface $userRepository
+        protected UserRepository $userRepository
     ) {}
 
+    /**
+     * Attempt login and return Passport token if successful
+    */
     public function attemptLogin(string $email, string $password): ?PersonalAccessTokenResult
     {
         try {
             $user = $this->userRepository->findByEmail($email);
+
             if ($this->validateCredentials($user, $password)) {
-                return $user->createToken('sso-token');
+                auth()->login($user, true);
+
+                // create passport token for SSO
+                return $user->createToken('sso-foodpanda');
             }
-        } catch (\Throwable $th) {
-            Log::error('Failed attempt login error: ' . $th->getMessege());
+        } catch (\Exception $e) {
+            Log::error('Login attempt failed: ' . $e->getMessage());
         }
+
         return null;
     }
 
